@@ -97,7 +97,7 @@ def generate_map_img(df, img_dest, img_dim=IMG_DIM_DFT, img_name='image'):
     run_line_map = px.line_mapbox(run_df, lat="latitude", lon="longitude", center=map_center, mapbox_style="open-street-map", zoom=map_zoom, height = img_dim['height'], width = img_dim['width'])
     run_line_map.layout.margin = dict(t=0, b=0, l=0, r=0)
     run_line_map.update_traces(line=dict(color="Red", width=2))
-    run_line_map.write_image(os.path.join(img_dest, img_name + '.png'))
+    run_line_map.write_image(os.path.join(img_dest, img_name))
 
 def main(argv):
     # print(argv[0])
