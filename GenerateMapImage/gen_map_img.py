@@ -65,8 +65,8 @@ def calc_zoom(lons: tuple, lats: tuple, projection: str='mercator',
         width_to_height = img_dim['width'] / img_dim['height']
         margin = 1.2
         # margin=0.5
-        height = (maxlat - minlat) * margin * width_to_height * 7.5
-        width = (maxlon - minlon) * margin  * 7.5
+        height = (maxlat - minlat) * margin * width_to_height * height_dim_ratio
+        width = (maxlon - minlon) * margin  * width_dim_ratio
         # print('Height: ' + str(height) + ' Width: ' + str(width))
 
         lon_zoom = np.interp(width , lon_zoom_range, range(20, 0, -1))
@@ -80,7 +80,7 @@ def calc_zoom(lons: tuple, lats: tuple, projection: str='mercator',
 
     return zoom
 
-def generate_map_img(df, img_dest, img_dim=IMG_DIM_DFT, img_name='image'):
+def generate_map_img(df, img_dest, img_dim=IMG_DIM_DFT, img_name='image.png'):
     run_df = df.copy()
 
     lat_max = run_df['latitude'].max()
@@ -103,7 +103,7 @@ def main(argv):
     # print(argv[0])
     run_df = pd.read_pickle(os.path.join(argv[0], 'workout.pickle'))
     img_dest = argv[0]
-    generate_map_img(run_df, img_dest, img_dim=THUMB_DIM, img_name='thumb')
+    generate_map_img(run_df, img_dest, img_dim=THUMB_DIM, img_name='thumb.png')
 
 if __name__ == '__main__':
 	main(sys.argv[1:])
